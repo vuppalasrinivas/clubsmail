@@ -13,10 +13,12 @@ class ClubController < ApplicationController
         @club = []
         @club =  result.map{|x| x["ddAddress"]}
         p "..........."
+        p @club
+        p ".........."
         if @club.empty?
             flash[:notice] = "No results were found for your search"
         end
-        p ".........."
+        
         
   end
 end
