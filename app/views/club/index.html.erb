@@ -22,8 +22,9 @@ clubcount = '<%= raw @club.length %>';
 <% @club.each do |u| %>
   
   clubsaddress = '<%=u%>';
-  clubsaddress = clubsaddress.replace(/nº/g , "");
- // alert(clubsaddress);
+  //clubsaddress = clubsaddress.replace(/nº/g , "");
+  clubsaddress = clubsaddress.substring(0,clubsaddress.indexOf("nº"));
+ //alert(clubsaddress);
 geocoder.geocode( { 'address': clubsaddress}, function(results, status) {
   
   if (status == google.maps.GeocoderStatus.OK) {
@@ -32,10 +33,10 @@ geocoder.geocode( { 'address': clubsaddress}, function(results, status) {
     longitude1 = results[0].geometry.location.lng();
     latitude.push(latitude1);
     longitude.push(longitude1);
-    
+    //alert(latitude);
   } 
 });
-
+<% end %>
 handler = Gmaps.build('Google');
 
 handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
@@ -62,7 +63,7 @@ handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
   handler.getMap().setZoom(14);
 });
 
-<% end %>
+
 
 </script>
 
